@@ -7,10 +7,17 @@ describe('SoundcloudDownloadController', function() {
 		scope = $rootScope.$new();
 		ctrl = $controller('SoundcloudDownloadController', {
 			$scope: scope
-		})
-	}))
+		});
+	}));
 
 	it ('initialises with an empty list', function() {
 		expect(scope.downloadableStream).toBeUndefined();
 	});
+
+	describe('when viewing downloadable tracks', function() {
+
+		var tracks = [];
+
+	});
 });
+

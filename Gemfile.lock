@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    dotenv (1.0.2)
     hashie (2.1.2)
     httmultiparty (0.3.16)
       httparty (>= 0.7.3)
@@ -29,5 +30,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   sinatra
   soundcloud
