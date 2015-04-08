@@ -21,4 +21,17 @@ def downloadable_urls
 	user_track_urls(downloadable)
 end
 
+def public?(tracks)
+	tracks.map { |track| track.sharing == "public" }
+end
+
+# def tracks_embed_info
+# 	embed_info = []
+# 	downloadable_urls.each do |track|
+# 		embed = @client.get('/oembed', :url => track)
+# 		html_embed = embed['html']
+# 		embed_info << html_embed
+# 	end
+# end
+
 
