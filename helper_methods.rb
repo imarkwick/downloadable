@@ -7,22 +7,28 @@ def soundcloud_connect
 	)
 end
 
-def user_track_urls(tracks)
+def track_urls(tracks)
 	@track_urls = []
 	tracks.each { |track| @track_urls << track.permalink_url }
 	@track_urls
 end
 
-def downloadable
-	@downloadable_tracks = @tracks.select { |track| track.downloadable }
+def downloadable(tracks)
+	tracks.select { |track| track.downloadable }
 end
 
-def downloadable_urls
-	user_track_urls(downloadable)
+def downloadable_urls(tracks)
+	track_urls(downloadable(tracks))
 end
 
 def public?(tracks)
 	tracks.map { |track| track.sharing == "public" }
+end
+
+def stream_url_array(tracks_array)
+	url_array = []
+	tracks_array.each { |track| url_array << track["origin"]["permalink_url"] }
+	url_array
 end
 
 # def tracks_embed_info
@@ -33,5 +39,4 @@ end
 # 		embed_info << html_embed
 # 	end
 # end
-
 
