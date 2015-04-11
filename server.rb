@@ -21,10 +21,12 @@ get '/' do
 	stream = @client.get('/me/activities/tracks/affiliated', :limit => 100)
 	stream_tracks = stream.collection
 	@tracks_array = stream_url_array(stream_tracks)
+	new_downloadable_tracks = downloadable_only(stream_tracks)
 
-	puts stream_tracks.first
 	puts '-----------------'
-	puts stream_url_array(stream_tracks)
+	puts new_downloadable_tracks.length
+	puts '========='
+	puts stream_tracks[0]["origin"]["downloadable"]
 
 	test_track_url = 'http://soundcloud.com/joehertz/tears'
 	@embed_info = @client.get('/oembed', :url => test_track_url)

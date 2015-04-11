@@ -31,6 +31,10 @@ def stream_url_array(tracks_array)
 	url_array
 end
 
+def downloadable_only(tracks_array)
+	tracks_array.select { |track| track["origin"]["downloadable"] }
+end
+
 # def tracks_embed_info
 # 	embed_info = []
 # 	downloadable_urls.each do |track|
