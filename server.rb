@@ -18,20 +18,14 @@ get '/' do
 	@tracks = @client.get('/users/952969/tracks')
 	id = @client.get('/me').id
 
-	stream = @client.get('/me/activities/tracks/affiliated', :limit => 100)
+	stream = @client.get('/me/activities/tracks/affiliated', :limit => 200)
 	stream_tracks = stream.collection
-	@tracks_array = stream_url_array(stream_tracks)
+	
 	new_downloadable_tracks = downloadable_only(stream_tracks)
+	downloadable_urls = dwnld_urls(new_downloadable_tracks)
 
-	puts '-----------------'
-	puts new_downloadable_tracks.length
-	puts '========='
-	puts stream_tracks[0]["origin"]["downloadable"]
-
-	test_track_url = 'http://soundcloud.com/joehertz/tears'
-	@embed_info = @client.get('/oembed', :url => test_track_url)
-	# puts @embed_info['html']	
-	# puts @embed_info.is_a?(Hash)
+	test = downloadable_urls[0]
+	test_stream = embed_playlist(downloadable_urls)
 
 	erb :index
 end

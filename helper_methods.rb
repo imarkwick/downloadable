@@ -26,21 +26,30 @@ def public?(tracks)
 end
 
 def stream_url_array(tracks_array)
-	url_array = []
-	tracks_array.each { |track| url_array << track["origin"]["permalink_url"] }
-	url_array
+	tracks_array.select { |track| track["origin"]["permalink_url"] }
 end
 
 def downloadable_only(tracks_array)
 	tracks_array.select { |track| track["origin"]["downloadable"] }
 end
 
-# def tracks_embed_info
-# 	embed_info = []
-# 	downloadable_urls.each do |track|
-# 		embed = @client.get('/oembed', :url => track)
-# 		html_embed = embed['html']
-# 		embed_info << html_embed
-# 	end
-# end
+def dwnld_urls(tracks)
+	good_urls = []
+	tracks.each { |track| good_urls << track["origin"]["permalink_url"] }
+	good_urls
+end
+
+def embed_info(track_url)
+	client = soundcloud_connect
+	track = client.get('/oembed', :url => track_url)
+	html = track['html']
+end
+
+def embed_playlist(track_urls)
+	iframe_array = []
+	track_urls.each do |url|
+		iframe_array << embed_info(url)
+	end
+	iframe_array
+end
 
