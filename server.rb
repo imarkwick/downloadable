@@ -24,8 +24,7 @@ get '/' do
 	new_downloadable_tracks = downloadable_only(stream_tracks)
 	downloadable_urls = dwnld_urls(new_downloadable_tracks)
 
-	test = downloadable_urls[0]
-	test_stream = embed_playlist(downloadable_urls)
+	@downloadable_stream = embed_playlist(downloadable_urls)
 
 	erb :index
 end
