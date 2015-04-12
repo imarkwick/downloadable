@@ -5,9 +5,8 @@
     <title>SoundCloud Downloadable</title>
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="foundation.css" />
+    <link rel="stylesheet" href="stroll.css" />
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="//connect.soundcloud.com/sdk.js"></script>
   </head>
 
@@ -25,15 +24,24 @@
       <h2 class="small-12 columns">Download Stream</h2>
     </header>
     <main class="row">
-      <ul class="small-12 columns" id="stream">
-      <% @downloadable_stream.each do |track| %>
-        <li class="stream-list">
-          <%= track %>
-        </li>
-      <% end %>
-      </ul>
+      <section class="small-12 columns" id="main">
+        <article>
+          <ul class="fly-reverse" id="stream">
+            <% @downloadable_stream.each do |track| %>
+              <li class="stream-list">
+                <%= track %>
+              </li>
+            <% end %>
+          </ul>
+        </article>
+      </section>
     </main>
 
     <script src="js/foundation/foundation.js"></script>
+    <script src="js/stroll.min.js"></script>
+    <script>
+      stroll.bind('#main ul');
+    </script>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
   </body>
 </html>
