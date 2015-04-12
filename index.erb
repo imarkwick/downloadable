@@ -1,21 +1,25 @@
 <!doctype html>
-<html lang="en" ng-app="SoundcloudDownload">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>SoundCloud Downloadable</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="app.css"
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="foundation.css" />
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="//connect.soundcloud.com/sdk.js"></script>
   </head>
 
-  <body onload="initialize()">
-    <h1><%= @username %></h1>
+  <body>
+    <div class="row">
+      <div class="small-12 columns">
+        <h1><%= @username %></h1>
+      </div>
+    </div>
     <p>Following: <%= @following_count %></p>
 
-<!--     <iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F188179113&show_artwork=true&oauth_token=1-123032-952969-3eaf6f299d08970b"></iframe> -->
+  <!--     <iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F188179113&show_artwork=true&oauth_token=1-123032-952969-3eaf6f299d08970b"></iframe> -->
 
     <h2>Download Stream</h2>
     <ul id="stream">
@@ -26,7 +30,6 @@
     <% end %>
     </ul>
 
-    <script src="js/app.js"></script>
-    <script src="js/downloadableController.js"></script>
+    <script src="js/foundation/foundation.js"></script>
   </body>
 </html>

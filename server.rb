@@ -4,7 +4,7 @@ require 'dotenv'
 
 Dotenv.load
 
-require_relative 'helper_methods'
+require_relative 'helpers/helper_methods'
 
 set :views, Proc.new { File.join(root) } 
 
