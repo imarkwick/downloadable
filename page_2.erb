@@ -17,30 +17,11 @@
     <summary class="row">
       <p class="small-12 columns">Following: <%= @following_count %></p>
     </summary>
-
-  <!--     <iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F188179113&show_artwork=true&oauth_token=1-123032-952969-3eaf6f299d08970b"></iframe> -->
-
     <header class="row">
-      <h2 class="small-6 columns">Download Stream</h2>
-      <a href="/page_2"><h6>Next</h6></a>
+      <h2 class="small-12 columns">Download Stream</h2>
     </header>
-    <main class="row">
-      <section class="small-12 columns" id="main">
-        <article>
-          <ul class="fly-reverse" id="stream">
-            <% @downloadable_stream.each do |track| %>
-              <li class="stream-list">
-                <%= track %>
-              </li>
-            <% end %>
-          </ul>
-        </article>
-      </section>
-    </main>
 
-    <aside class="row">
-      <a class="small-12 columns" href="/page_2" id="next">Next</a>
-    </aside>
+
 
     <script src="js/foundation/foundation.js"></script>
     <script src="js/stroll.min.js"></script>

@@ -7,24 +7,6 @@ def soundcloud_connect
 	)
 end
 
-def track_urls(tracks)
-	@track_urls = []
-	tracks.each { |track| @track_urls << track.permalink_url }
-	@track_urls
-end
-
-def downloadable(tracks)
-	tracks.select { |track| track.downloadable }
-end
-
-def downloadable_urls(tracks)
-	track_urls(downloadable(tracks))
-end
-
-def public?(tracks)
-	tracks.map { |track| track.sharing == "public" }
-end
-
 def stream_url_array(tracks_array)
 	tracks_array.select { |track| track["origin"]["permalink_url"] }
 end
@@ -33,7 +15,7 @@ def downloadable_only(tracks_array)
 	tracks_array.select { |track| track["origin"]["downloadable"] }
 end
 
-def dwnld_urls(tracks)
+def download_urls(tracks)
 	good_urls = []
 	tracks.each { |track| good_urls << track["origin"]["permalink_url"] }
 	good_urls
@@ -52,4 +34,5 @@ def embed_playlist(track_urls)
 	end
 	iframe_array
 end
+
 

@@ -31,3 +31,7 @@ ul li {
 ul li:nth-child(odd) {
 	background-color: #FFF;
 }
+
+a #next {
+	text-align: center;
+}
