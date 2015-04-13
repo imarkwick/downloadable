@@ -25,7 +25,7 @@ get '/' do
 	@downloadable_stream = embed_playlist(downloadable_urls)
 
 	puts stream_tracks.length
-	puts new_downloadable_tracks.length
+	puts new_downloadable_tracks.first.created_at
 
 	erb :index
 end
@@ -48,7 +48,7 @@ get '/page_2' do
 	@second_downloadable = embed_playlist(next_urls)
 
 	puts stream_next_tracks.length
-	puts next_downloadable.length
+	puts next_downloadable.first.created_at
 
 	erb :page_2
 end
