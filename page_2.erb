@@ -20,6 +20,19 @@
     <header class="row">
       <h2 class="small-12 columns">Download Stream</h2>
     </header>
+    <main class="row">
+      <section class="small-12 columns" id="main">
+        <article>
+          <ul class="fly-reverse" id="stream">
+            <% @second_downloadable.each do |track| %>
+              <li class="stream-list">
+                <%= track %>
+              </li>
+            <% end %>
+          </ul>
+        </article>
+      </section>
+    </main>
 
 
 

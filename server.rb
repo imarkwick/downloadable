@@ -16,17 +16,16 @@ get '/' do
 	@following_count = client.get('/me/').followings_count
 
 	@stream = client.get('/me/activities/tracks/affiliated', :limit => 200)
-	# @second_stream = client.get('/me/activities/tracks/affiliated', :limit => 200,  :linked_partitioning => 1)
 
 	stream_tracks = @stream.collection
-
-	puts stream_tracks.first
-	# puts @second_stream.next_href
 	
 	new_downloadable_tracks = downloadable_only(stream_tracks)
 	downloadable_urls = download_urls(new_downloadable_tracks)
 
 	@downloadable_stream = embed_playlist(downloadable_urls)
+
+	puts stream_tracks.length
+	puts new_downloadable_tracks.length
 
 	erb :index
 end
@@ -34,13 +33,22 @@ end
 get '/page_2' do
 
 	client = soundcloud_connect
+	@username = client.get('/me').username
+	@following_count = client.get('/me/').followings_count
 
 	second_stream = client.get('/me/activities/tracks/affiliated', :limit => 200,  :linked_partitioning => 1)
+	href = second_stream.next_href
+	track_listing = client.get(href)
 
-	next_tracks = second_stream.next_href
-	# next_collection = next_tracks.collection
+	stream_next_tracks = track_listing.collection
 
-	puts next_tracks.is_a?(Object)
+	next_downloadable = downloadable_only(stream_next_tracks)
+	next_urls = download_urls(next_downloadable)
+
+	@second_downloadable = embed_playlist(next_urls)
+
+	puts stream_next_tracks.length
+	puts next_downloadable.length
 
 	erb :page_2
 end
