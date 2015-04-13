@@ -35,4 +35,10 @@ def embed_playlist(track_urls)
 	iframe_array
 end
 
+def remove_mixes(tracks)
+	only_tracks = []
+	tracks.each { |track| only_tracks << track if track["origin"]["duration"] < 720000 }
+	only_tracks
+end
+
 
