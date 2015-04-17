@@ -1,9 +1,9 @@
 def soundcloud_connect
-	@client = SoundCloud.new(
+	SoundCloud.new(
 		:client_id 			=> ENV['CLIENT_ID'],
 		:client_secret 	=> ENV['CLIENT_SECRET'],
 		:username				=> ENV['USERNAME'],
-		:password				=> ENV['PASSWORD']
+		:password				=> ENV['PASSWORD']	
 	)
 end
 
@@ -29,7 +29,9 @@ end
 
 def embed_playlist(track_urls)
 	iframe_array = []
+
 	track_urls.each do |url|
+		puts "Embedding " + url
 		iframe_array << embed_info(url)
 	end
 	iframe_array
@@ -39,6 +41,26 @@ def remove_mixes(tracks)
 	only_tracks = []
 	tracks.each { |track| only_tracks << track if track["origin"]["duration"] < 720000 }
 	only_tracks
+end
+
+def only_public(tracks)
+	tracks.select { |track| track["origin"]["sharing"] == "public" }
+end
+
+def downloadable_tracks(stream_tracks)
+	downloadable = downloadable_only(stream_tracks)
+	minus_mixes = remove_mixes(downloadable)
+	minus_mixes
+end
+
+def most_downloaded(tracks)
+	tracks.sort_by! { |track| track["origin"]["download_count"] }
+end
+
+def show_titles(tracks)
+	titles = []
+	tracks.each { |track| titles << track["origin"]["permalink_url"] }
+	titles
 end
 
 

@@ -1,8 +1,8 @@
-#putTheWidgetHere {
+/*#putTheWidgetHere {
 	width: auto;
 	height: 10%;
 	color: #ff0066;
-}
+}*/
 
 iframe {
 	width: 100%;
@@ -37,4 +37,8 @@ ul li:nth-child(odd) {
 a {
 	text-align: center;
 	margin-top: 1rem;
+}
+
+a:hover {
+	color: #00EE00;
 }
