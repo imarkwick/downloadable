@@ -29,7 +29,6 @@ end
 
 def embed_playlist(track_urls)
 	iframe_array = []
-
 	track_urls.each do |url|
 		puts "Embedding " + url
 		iframe_array << embed_info(url)
@@ -54,7 +53,8 @@ def downloadable_tracks(stream_tracks)
 end
 
 def most_downloaded(tracks)
-	tracks.sort_by! { |track| track["origin"]["download_count"] }
+	list = tracks.sort_by { |k, v| k["origin"]["download_count"] }
+	list.reverse
 end
 
 def show_titles(tracks)

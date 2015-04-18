@@ -18,14 +18,12 @@ get '/' do
 	stream_tracks = @stream.collection
 	
 	tracks = downloadable_tracks(stream_tracks)
-	
-	filtered = only_public(tracks)
+	@filtered = only_public(tracks)
 
-	urls = download_urls(filtered)
-
+	urls = download_urls(@filtered)
 	@downloadable_stream = embed_playlist(urls)
 
-	# test = most_downloaded(tracks)
+	test = most_downloaded(@filtered)
 
 	erb :index
 end
