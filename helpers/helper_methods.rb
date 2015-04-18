@@ -30,7 +30,7 @@ end
 def embed_playlist(track_urls)
 	iframe_array = []
 	track_urls.each do |url|
-		puts "Embedding " + url
+		# puts "Embedding " + url
 		iframe_array << embed_info(url)
 	end
 	iframe_array

@@ -22,9 +22,7 @@ get '/' do
 
 	urls = download_urls(@filtered)
 	@downloadable_stream = embed_playlist(urls)
-
-	test = most_downloaded(@filtered)
-
+	
 	erb :index
 end
 
@@ -41,8 +39,9 @@ get '/page_2' do
 	stream_next_tracks = track_listing.collection
 	
 	tracks = downloadable_tracks(stream_next_tracks)
-	
-	urls = download_urls(tracks)
+	filtered = only_public(tracks)
+
+	urls = download_urls(filtered)
 	@second_downloadable = embed_playlist(urls)
 
 	erb :page_2
@@ -53,6 +52,19 @@ get '/on_it' do
 	client = soundcloud_connect
 	@username = client.get('/me').username
 	@following_count = client.get('/me/').followings_count
+
+	first_stream = client.get('/me/activities/tracks/affiliated', :limit => 200)
+	second = client.get('/me/activities/tracks/affiliated', :limit => 200,  :linked_partitioning => 1)
+	href = second.next_href
+	second_stream = client.get(href)
+
+	total_tracks = first_stream.collection + second_stream.collection
+	downloadable = downloadable_tracks(total_tracks)
+	filter = only_public(downloadable)
+	order = most_downloaded(filter)
+
+	urls = download_urls(order)
+	@ordered = embed_playlist(urls)
 
 	erb :on_it
 end
