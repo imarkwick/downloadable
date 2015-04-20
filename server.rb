@@ -22,7 +22,7 @@ get '/' do
 
 	urls = download_urls(@filtered)
 	@downloadable_stream = embed_playlist(urls)
-	
+
 	erb :index
 end
 
@@ -65,6 +65,10 @@ get '/on_it' do
 
 	urls = download_urls(order)
 	@ordered = embed_playlist(urls)
+
+	puts order.length
+	puts order.first["origin"]["playback_count"]
+	puts order.last["origin"]["playback_count"]
 
 	erb :on_it
 end
