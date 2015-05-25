@@ -10,6 +10,9 @@ require_relative 'helpers/helper_methods'
 get '/' do
 	
 	client = soundcloud_connect
+	
+	# client =	authenticate_user
+	# redirect_to client.authorize_url()
 
 	@username = client.get('/me').username
 	@following_count = client.get('/me/').followings_count

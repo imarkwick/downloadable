@@ -7,6 +7,14 @@ def soundcloud_connect
 	)
 end
 
+def authenticate_user
+	Soundcloud.new(
+		:client_id 			=> ENV['CLIENT_ID'],
+		:client_secret 	=> ENV['CLIENT_SECRET'],
+		:redirect_uri 	=> ENV['REDIRECT_URL']
+	)
+end
+
 def stream_url_array(tracks_array)
 	tracks_array.select { |track| track["origin"]["permalink_url"] }
 end
