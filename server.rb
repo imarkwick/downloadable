@@ -9,6 +9,8 @@ require_relative 'helpers/helper_methods'
 
 get '/' do
 	
+	puts 'here'
+	puts soundcloud_connect
 	client = soundcloud_connect
 	
 	# client =	authenticate_user
