@@ -12,10 +12,10 @@ end
 
 def downloadable_only(tracks_array)
 	@new_array = []
+	tracks_array.length
 	tracks_array.each { |t|
-		if t['origin']['downloadable'] == true
+		if t['origin'] != nil && t['origin']['downloadable'] == true
 			@new_array << t
-			puts t['origin']['downloadable'].is_a?(Object)
 		end
 	}
 	@new_array

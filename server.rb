@@ -28,13 +28,7 @@ end
 
 get '/page_2' do
 
-	client = SoundCloud.new({
-		:client_id 			=> 'e49d27008e32d20179f085a5f6847c5c',
-		:client_secret 	=> '74adc0e1f7ce90fd6c1420e88195a105',
-		:username				=> 'joetong1@me.com',
-		:password				=> 'Michael1990'
-	})
-	puts client.get('/me').username
+	client = soundcloud_new
 
 	@username = client.get('/me').username
 	@following_count = client.get('/me/').followings_count
@@ -44,28 +38,19 @@ get '/page_2' do
 	track_listing = client.get(href)
 	stream_next_tracks = track_listing.collection
 		
-	puts stream_next_tracks.length
-
 	tracks = downloadable_tracks(stream_next_tracks)
 
-	puts tracks.length
 	filtered = only_public(tracks)
-	puts filtered.length
 
-	# urls = download_urls(filtered)
-	# @second_downloadable = embed_playlist(urls, client)
+	urls = download_urls(filtered)
+	@second_downloadable = embed_playlist(urls, client)
 
 	erb :page_2
 end
 
 get '/on_it' do
 
-	client = SoundCloud.new({
-		:client_id 			=> 'e49d27008e32d20179f085a5f6847c5c',
-		:client_secret 	=> '74adc0e1f7ce90fd6c1420e88195a105',
-		:username				=> 'joetong1@me.com',
-		:password				=> 'Michael1990'
-	})
+	client = soundcloud_new
 
 	@username = client.get('/me').username
 	@following_count = client.get('/me/').followings_count
