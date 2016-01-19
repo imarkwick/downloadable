@@ -1,12 +1,3 @@
-def soundcloud_connect
-	SoundCloud.new(
-		:client_id 			=> ENV['CLIENT_ID'],
-		:client_secret 	=> ENV['CLIENT_SECRET'],
-		:username				=> ENV['USERNAME'],
-		:password				=> ENV['PASSWORD']	
-	)
-end
-
 # def authenticate_user
 # 	Soundcloud.new(
 # 		:client_id 			=> ENV['CLIENT_ID'],
@@ -20,7 +11,14 @@ def stream_url_array(tracks_array)
 end
 
 def downloadable_only(tracks_array)
-	tracks_array.select { |track| track["origin"]["downloadable"] }
+	@new_array = []
+	tracks_array.each { |t|
+		if t['origin']['downloadable'] == true
+			@new_array << t
+			puts t['origin']['downloadable'].is_a?(Object)
+		end
+	}
+	@new_array
 end
 
 def download_urls(tracks)
@@ -29,17 +27,16 @@ def download_urls(tracks)
 	good_urls
 end
 
-def embed_info(track_url)
-	client = soundcloud_connect
+def embed_info(track_url, client)
 	track = client.get('/oembed', :url => track_url)
 	html = track['html']
 end
 
-def embed_playlist(track_urls)
+def embed_playlist(track_urls, client)
 	iframe_array = []
 	track_urls.each do |url|
 		# puts "Embedding " + url
-		iframe_array << embed_info(url)
+		iframe_array << embed_info(url, client)
 	end
 	iframe_array
 end

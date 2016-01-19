@@ -9,31 +9,32 @@ require_relative 'helpers/helper_methods'
 
 get '/' do
 	
-	puts 'here'
-	puts soundcloud_connect
-	client = soundcloud_connect
-	
-	# client =	authenticate_user
-	# redirect_to client.authorize_url()
+	client = soundcloud_new
 
 	@username = client.get('/me').username
 	@following_count = client.get('/me/').followings_count
 
 	@stream = client.get('/me/activities/tracks/affiliated', :limit => 200)
 	stream_tracks = @stream.collection
-	
+
 	tracks = downloadable_tracks(stream_tracks)
 	@filtered = only_public(tracks)
 
 	urls = download_urls(@filtered)
-	@downloadable_stream = embed_playlist(urls)
+	@downloadable_stream = embed_playlist(urls, client)
 
 	erb :index
 end
 
 get '/page_2' do
 
-	client = soundcloud_connect
+	client = SoundCloud.new({
+		:client_id 			=> 'e49d27008e32d20179f085a5f6847c5c',
+		:client_secret 	=> '74adc0e1f7ce90fd6c1420e88195a105',
+		:username				=> 'joetong1@me.com',
+		:password				=> 'Michael1990'
+	})
+	puts client.get('/me').username
 
 	@username = client.get('/me').username
 	@following_count = client.get('/me/').followings_count
@@ -42,19 +43,30 @@ get '/page_2' do
 	href = second_stream.next_href
 	track_listing = client.get(href)
 	stream_next_tracks = track_listing.collection
-	
-	tracks = downloadable_tracks(stream_next_tracks)
-	filtered = only_public(tracks)
+		
+	puts stream_next_tracks.length
 
-	urls = download_urls(filtered)
-	@second_downloadable = embed_playlist(urls)
+	tracks = downloadable_tracks(stream_next_tracks)
+
+	puts tracks.length
+	filtered = only_public(tracks)
+	puts filtered.length
+
+	# urls = download_urls(filtered)
+	# @second_downloadable = embed_playlist(urls, client)
 
 	erb :page_2
 end
 
 get '/on_it' do
 
-	client = soundcloud_connect
+	client = SoundCloud.new({
+		:client_id 			=> 'e49d27008e32d20179f085a5f6847c5c',
+		:client_secret 	=> '74adc0e1f7ce90fd6c1420e88195a105',
+		:username				=> 'joetong1@me.com',
+		:password				=> 'Michael1990'
+	})
+
 	@username = client.get('/me').username
 	@following_count = client.get('/me/').followings_count
 
@@ -77,4 +89,16 @@ get '/on_it' do
 
 	erb :on_it
 end
+
+private
+
+def soundcloud_new
+	SoundCloud.new({
+		:client_id 			=> 'e49d27008e32d20179f085a5f6847c5c',
+		:client_secret 	=> '74adc0e1f7ce90fd6c1420e88195a105',
+		:username				=> 'joetong1@me.com',
+		:password				=> 'Michael1990'
+	})
+end
+
 

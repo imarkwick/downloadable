@@ -36,4 +36,4 @@ DEPENDENCIES
   byebug
   dotenv
   sinatra
-  soundcloud
+  soundcloud (~> 0.3.2)
